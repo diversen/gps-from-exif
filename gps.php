@@ -12,10 +12,37 @@ namespace diversen;
  */
 class gps {
 
-    public static function get($exif, $assoc = false) {
-        //get the EXIF
-        //$exif = exif_read_data($fileName);
-        //get the Hemisphere multiplier
+    /**
+     * Read exif data from file
+     * @param string $file
+     * @return array|false array if exif datawas found else false
+     */
+    private function getExifData($file) {
+        
+        $exif = @exif_read_data($file, 'EXIF', false);
+        if (!$exif) {
+            return false;
+        }
+        return $exif;
+    }
+
+    /**
+     * Returns an array with exif data from an image
+     * False if no exif data exists in the image
+     * @param string $file path to image
+     * @return array|false $array array with GPS info, e.g. <code>Array
+(
+    [latitude] => 56.382169444444
+    [longitude] => 9.8963
+)</code>
+
+     */
+    public function getGpsPosition($file) {
+
+        $exif = $this->getExifData($file);
+        if (!$exif) {
+            return false;
+        }
 
         $LatM = 1;
         $LongM = 1;
@@ -26,7 +53,7 @@ class gps {
             $LongM = -1;
         }
 
-        //get the GPS data
+        // Get the GPS data
         $gps['LatDegree'] = $exif["GPSLatitude"][0];
         $gps['LatMinute'] = $exif["GPSLatitude"][1];
         $gps['LatgSeconds'] = $exif["GPSLatitude"][2];
@@ -47,11 +74,30 @@ class gps {
         $result['latitude'] = $LatM * ($gps['LatDegree'] + ($gps['LatMinute'] / 60) + ($gps['LatgSeconds'] / 3600));
         $result['longitude'] = $LongM * ($gps['LongDegree'] + ($gps['LongMinute'] / 60) + ($gps['LongSeconds'] / 3600));
 
-        if ($assoc) {
-            return $result;
-        }
+        return $result;
 
-        return json_encode($result);
+    }
+
+    /**
+     * Exampe of getting a google map from 
+     * @param float $lat latitude
+     * @param float $long longitude
+     * @return type
+     */
+    public function getGmap($lat, $long) {
+        $width = conf::getModuleIni('gallery_image_size');
+        $gmap = <<<EOF
+<div class ="google_map">
+<iframe 
+width="$width" 
+height="350" 
+frameborder="0" 
+scrolling="no" 
+marginheight="0" 
+marginwidth="0" 
+src="http://maps.google.com/?ie=UTF8&amp;hq=&amp;t=h&amp;ll=$lat,$long&amp;spn=0.016643,0.036478&amp;z=14&amp;output=embed"></iframe>
+</div>
+EOF;
+        return $gmap;
     }
 }
-
