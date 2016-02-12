@@ -11,14 +11,18 @@ include_once "vendor/autoload.php";
 
 use \diversen\gps;
 
+// Example file
 $file = "vendor/diversen/gps-from-exif/exmple.jpg";
 
 $g = new gps();
-$ary = $g->get($file);
 
-print_r($ary);
+// Get GPS position
+$gps = $g->getGpsPosition($file);
 
-echo $g->getGmap($ary['latitude'], $ary['longitude']);
+print_r($gps);
+
+// Get a goole map
+echo $gmap = $g->getGmap($gps['latitude'], $gps['longitude']);
 
 ~~~
  
