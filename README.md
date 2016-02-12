@@ -2,7 +2,11 @@
 
 Get GPS from exif
 
-Example: 
+Install: 
+
+    composer require gps-from-exif
+
+Usage example: 
 
 ~~~.php
 <?php
@@ -12,7 +16,7 @@ include_once "vendor/autoload.php";
 use \diversen\gps;
 
 // Example file
-$file = "vendor/diversen/gps-from-exif/exmple.jpg";
+$file = "vendor/diversen/gps-from-exif/example.jpg";
 
 $g = new gps();
 
