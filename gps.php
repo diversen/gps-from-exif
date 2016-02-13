@@ -30,18 +30,18 @@ class gps {
      * Returns an array with exif data from an image
      * False if no exif data exists in the image
      * @param string $file path to image
-     * @return array|false $array array with GPS info, e.g. <code>Array
+     * @return array $array array with GPS info, e.g. <code>Array
 (
     [latitude] => 56.382169444444
     [longitude] => 9.8963
-)</code>
+)</code> Empty if exif data could not be used
 
      */
     public function getGpsPosition($file) {
 
-        $exif = $this->getExifData($file);
-        if (!$exif) {
-            return false;
+        $exif = $this->getExifData($file);        
+        if (!$exif || !isset($exif['GPSLatitude']) || !isset($exif['GPSLongitude']) || !isset($exif['GPSLatitudeRef'])) {
+            return array();
         }
 
         $LatM = 1;
