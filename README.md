@@ -9,8 +9,6 @@ Install:
 Usage example: 
 
 ~~~.php
-<?php
-
 include_once "vendor/autoload.php";
 
 use \diversen\gps;
@@ -30,7 +28,7 @@ if (empty($gps)) {
 print_r($gps);
 
 // Get a google map
-echo $gmap = $g->getGmap($gps['latitude'], $gps['longitude']);
+echo $gmap = $g->getGmap($gps['latitude'], $gps['longitude'], 600, 350);
 
 ~~~
  
