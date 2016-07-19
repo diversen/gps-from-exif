@@ -3,7 +3,7 @@
 namespace diversen;
 
 /**
- * Class with single method for getting GPS from exif data
+ * Class with methods for getting GPS from exif info from a file
  * Found on stackoverflow and sligtly modified 
  * @see http://stackoverflow.com/a/4178862/464549
  * @param array $exif
@@ -79,7 +79,7 @@ class gps {
     }
 
     /**
-     * Exampe of getting a google map from 
+     * Example of getting a google map from 
      * @param float $lat latitude
      * @param float $long longitude
      * @param int $width width of the google map

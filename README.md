@@ -4,7 +4,7 @@ Get GPS from exif
 
 Install: 
 
-    composer require gps-from-exif
+    composer require diversen/gps-from-exif
 
 Usage example: 
 
