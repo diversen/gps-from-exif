@@ -84,13 +84,12 @@ class gps {
      * @param float $long longitude
      * @return type
      */
-    public function getGmap($lat, $long) {
-        $width = conf::getModuleIni('gallery_image_size');
+    public function getGmap($lat, $long, $width = 600, $height = 350) {
         $gmap = <<<EOF
 <div class ="google_map">
 <iframe 
 width="$width" 
-height="350" 
+height="$height" 
 frameborder="0" 
 scrolling="no" 
 marginheight="0" 
