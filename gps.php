@@ -82,6 +82,8 @@ class gps {
      * Exampe of getting a google map from 
      * @param float $lat latitude
      * @param float $long longitude
+     * @param int $width width of the google map
+     * @param int $height height of the google map
      * @return type
      */
     public function getGmap($lat, $long, $width = 600, $height = 350) {
